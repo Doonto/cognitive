@@ -43,7 +43,7 @@
     "uniqCompNum": 66,
     "versionPublish": "4.8.4",
     "screenshot": "screenshot.png",
-    "favicon": "",
+    "favicon": "@PROJECT_PATH@/assets/images/enso-red3.svg",
     "noImageResize": "",
     "cookiesAlert": "",
     "gdpr": "",
