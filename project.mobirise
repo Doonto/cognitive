@@ -40,10 +40,10 @@
         "url": "https://fonts.googleapis.com/css?family=Bitter:400,400i,700"
       }
     ],
-    "uniqCompNum": 91,
+    "uniqCompNum": 93,
     "versionPublish": "4.8.10",
     "screenshot": "screenshot.png",
-    "favicon": "@PROJECT_PATH@/assets/images/enso-red5.svg",
+    "favicon": "@PROJECT_PATH@/assets/images/enso-red11.svg",
     "noImageResize": "",
     "cookiesAlert": "",
     "gdpr": "",
@@ -1096,25 +1096,14 @@
           "_styles": {
             "padding-top": "(@paddingTop * 15px)",
             "padding-bottom": "(@paddingBottom * 15px)",
-            "background-color": "@bg",
-            ".container-wrapper": {
-              "padding": "6.25rem",
-              "position": "relative",
-              "& when (@showSpaceAround)": {
-                "margin": "3.75rem"
-              }
+            "& when (@bg-type = 'color')": {
+              "background-color": "@bg-value"
             },
-            "& when (@bgContainer-type = 'color')": {
-              ".container-wrapper": {
-                "background-color": "@bgContainer-value"
-              }
-            },
-            "& when (@bgContainer-type = 'image')": {
-              ".container-wrapper": {
-                "background-image": "url(@bgContainer-value)",
-                "background-position": "center",
-                "background-repeat": "no-repeat",
-                "background-size": "cover"
+            "& when (@bg-type = 'image')": {
+              "background-image": "url(@bg-value)",
+              ".mbr-overlay": {
+                "background-color": "@overlayColor",
+                "opacity": "@overlayOpacity"
               }
             },
             "& when (@showIcons)": {
@@ -1125,67 +1114,14 @@
                 "color": "@iconsColor",
                 "font-size": "~\"@{iconsSize}rem\""
               }
-            },
-            ".item": {
-              "padding": ".5rem 0"
-            },
-            ".input-label, textarea, input": {
-              "background-color": "transparent"
-            },
-            ".form-wrapper": {
-              "background-color": "@bgFormColor"
-            },
-            "textarea": {
-              "border": "none",
-              "border-bottom": "1px dotted rgb(152, 152, 152)"
-            },
-            ".mbr-section-btn": {
-              "margin": "1.875rem 0 0"
-            },
-            ".btn": {
-              "padding": ".75rem 1rem"
-            },
-            "input": {
-              "width": "100%",
-              "border": "none",
-              "border-bottom": "1px dotted rgb(152, 152, 152)"
-            },
-            "form .btn": {
-              "display": "block"
-            },
-            "@media (max-width: 991px)": {
-              ".container-wrapper": {
-                "padding": "1rem 0"
-              },
-              "& when (@showSpaceAround)": {
-                ".container": {
-                  "margin": "6.25rem 0"
-                }
-              },
-              ".items-icon": {
-                "margin-bottom": "1rem"
-              },
-              ".form-wrapper": {
-                "padding": "1.875rem",
-                "margin-top": "1rem"
-              }
-            },
-            "@media (max-width: 576px)": {
-              "& when (@showSpaceAround)": {
-                ".container-wrapper": {
-                  "padding": "1rem 0",
-                  "margin": "1.875rem"
-                }
-              },
-              ".form-wrapper": {
-                "padding": "1rem"
-              }
             }
           },
-          "_name": "form1",
-          "_customHTML": "<section class=\"form1\" group=\"Forms\" plugins=\"amp-main,amp-form,amp-mustache\">\n\n    <mbr-parameters>\n        <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"9\" step=\"1\" value=\"0\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"9\" step=\"1\" value=\"0\">\n        <input type=\"checkbox\" title=\"Show Space Around\" name=\"showSpaceAround\" checked>\n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\">\n        <input type=\"checkbox\" title=\"Show Text\" name=\"showText\">\n        <input type=\"checkbox\" title=\"Show Form Title\" name=\"showFormTitle\" checked>\n\n        <input type=\"checkbox\" title=\"Show List\" name=\"showList\" checked>\n        <input type=\"range\" inline title=\"String Count\" name=\"stringCount\" min=\"1\" max=\"10\" value=\"3\" condition=\"showList\">\n        <input type=\"checkbox\" title=\"Show Icons\" name=\"showIcons\" condition=\"showList\" checked>\n        <input type=\"range\" inline title=\"Icons Size\" name=\"iconsSize\" min=\"0.5\" max=\"2\" step=\"0.2\" value=\"1.5\" condition=\"showIcons && showList\">\n        <input type=\"color\" title=\"Icons Color\" name=\"iconsColor\" value=\"#ffffff\" condition=\"showIcons && showList\">\n\n        <input type=\"color\" title=\"BG Form Colror\" name=\"bgFormColor\" value=\"#ffffff\">\n        <input type=\"color\" title=\"Background Color\" name=\"bg\" value=\"#ffffff\" condition=\"showSpaceAround\">\n        <input type=\"checkbox\" title=\"Media on Left/Right\" name=\"flexDirection\">\n\n\n        <fieldset type=\"background\" name=\"bgContainer\">\n            <input type=\"color\" title=\"Background Color\" value=\"#9fbcda\">\n            <input type=\"image\" title=\"Background Image\" value=\"../_images/background11.jpg\" selected>\n        </fieldset>\n        <input type=\"checkbox\" title=\"Overlay\" name=\"overlay\" condition=\"bgContainer.type !== 'color'\">\n        <input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#232122\" condition=\"overlay && bgContainer.type !== 'color'\">\n        <input type=\"range\" inline title=\"Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0.5\" condition=\"overlay && bgContainer.type !== 'color'\">\n        <!-- End block parameters -->\n    </mbr-parameters>\n    \n    <div class=\"container-wrapper\">\n        <div class=\"mbr-overlay\" mbr-if=\"overlay && bgContainer.type !== 'color'\" opacity=\"{{overlayOpacity}}\" bg-color=\"{{overlayColor}}\"></div>\n        <div class=\"container\">\n            <div class=\"mbr-row mbr-justify-content-between mbr-align-items-center\" mbr-class=\"{'mbr-row-reverse':flexDirection == true}\">\n                <div class=\"mbr-col-lg-5 mbr-col-md-12 mbr-col-sm-12\">\n    \n                    <h2 mbr-if=\"showTitle\" class=\" mbr-title main-title align-left mbr-white mbr-bold mbr-fonts-style mbr-mb-8\" mbr-theme-style=\"display-5\" data-app-selector=\".main-title\">Drop us a line\n                    </h2>\n                    <p class=\"mbr-fonts-style main-text mbr-text grey-color align-left mbr-mb-50\" mbr-theme-style=\"display-7\" data-app-selector=\".main-text\" mbr-if=\"showText\"></p>\n                    \n                    <div class=\"items-icon\" mbr-list mbr-list-grow=\"stringCount\" mbr-if=\"showList\">\n                         <div class=\"item item-icon\">\n                             <div class=\"card-icon-text mbr-align-items-center d-flex\">\n                                <div class=\"icon-wrap mbr-align-items-center d-flex mbr-justify-content-center\">\n                                    <span mbr-icon class=\"mbr-iconfont fa-map-marker fa\" mbr-if=\"showIcons\"></span>\n                                </div>\n                                <p class=\"item mbr-text mbr-fonts-style mbr-white\" mbr-theme-style=\"display-7\" data-app-selector=\".item, .items\">\n                                    Värtavägen 21, 115 53 Stockholm, Sweden</p>\n                            </div>\n                         </div>\n                         <div class=\"item item-icon\">\n                             <div class=\"card-icon-text mbr-align-items-center d-flex\">\n                                <div class=\"icon-wrap mbr-align-items-center d-flex mbr-justify-content-center\">\n                                    <span mbr-icon class=\"mbr-iconfont fa-phone fa\" mbr-if=\"showIcons\"></span>\n                                </div>\n                                <p class=\"item mbr-text mbr-white mbr-fonts-style \" mbr-theme-style=\"display-7\" data-app-selector=\".item, .items\">\n                                    +371 248 0 3110 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>\n                            </div>\n                         </div>\n                         <div class=\"item item-icon\">\n                             <div class=\"card-icon-text mbr-align-items-center d-flex\">\n                                <div class=\"icon-wrap mbr-align-items-center d-flex mbr-justify-content-center\">\n                                    <span mbr-icon class=\"mbr-iconfont fa fa-paper-plane-o\" mbr-if=\"showIcons\"></span>\n                                </div>\n                                <p class=\"item mbr-text mbr-fonts-style mbr-white\" mbr-theme-style=\"display-7\" data-app-selector=\".item, .items\">yury.smirnov@cognitive.im</p>\n                            </div>\n                         </div>\n                     </div>\n                </div>\n    \n                <div class=\"mbr-col-lg-6  mbr-col-md-12 mbr-col-sm-12\">\n                    <div mbr-form class=\"form-wrapper mbr-p-60\">\n                        <h2 mbr-if=\"showFormTitle\" class=\" mbr-title form-title align-left mbr-black mbr-light mbr-fonts-style mbr-mb-16\" mbr-theme-style=\"display-5\" data-app-selector=\".form-title\">Tell your story</h2>\n                        <form class=\"mbr-form display-7\" action=\"phpmailer.php\" method=\"post\" name=\"Mobirise Form\" target=\"_top\" novalidate>\n                            <div submit-success>\n                                <template data-form-alert type=\"amp-mustache\">Thank you for contacting us! We'll get in touch with you right away.</template>\n                            </div>\n                            <div submit-error>\n                                <template data-form-alert type=\"amp-mustache\">Thank you for contacting us! We'll get in touch with you right away.</template>\n                            </div>\n                            <div class=\"fieldset mbr-light\">\n                            \n                                <input type=\"hidden\" name=\"form[data][1][0]\" value=\"Name\">\n                                <input class=\"input-label\" type=\"text\" name=\"form[data][1][1]\" data-form-field=\"Name\" placeholder=\"Name\" required>\n                            \n                                <input type=\"hidden\" name=\"form[data][0][0]\" value=\"Email\">\n                                <input class=\"input-label\" type=\"email\" name=\"form[data][0][1]\" data-form-field=\"Email\" placeholder=\"Email\" required>\n                            \n                                <label class=\"area width-full\">\n                                    <input type=\"hidden\" name=\"form[data][3][0]\" value=\"Message\">\n                                    <textarea class=\"width-full\" name=\"form[data][3][1]\" rows=\"7\" data-form-field=\"Message\" placeholder=\"Message\"></textarea>\n                                </label>\n                            \n                            </div>\n                            <div class=\"align-center\">\n                                <div mbr-buttons mbr-theme-style=\"display-7\" data-toolbar=\"-mbrLink,-mbrBtnAdd,-mbrBtnMove\" class=\"mbr-section-btn\"><a type=\"submit\" class=\"btn width-full btn-black\" data-app-placeholder=\"Type Text\">Contact Us</a></div>\n                            </div>\n                        </form>\n                        <p class=\"mbr-fonts-style text-small grey-color mbr-text align-left mbr-mt-30 mbr-mb-30\" mbr-theme-style=\"display-7\" data-app-selector=\".text-small\" mbr-if=\"showText\">Lorem ipsum dolor sit amet, consectetur.</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>",
-          "_cid": "r8yRXibPEu",
-          "_anchor": "form1-l",
+          "_name": "content1",
+          "_customHTML": "<section class=\"content1\" group=\"Article\" plugins=\"amp-main\">\n          \n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->   \n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"4\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"4\">\n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\" checked>\n        <input type=\"checkbox\" title=\"Show Text\" name=\"showText\">\n        <input type=\"range\" inline title=\"String Count\" name=\"stringCount\" min=\"1\" max=\"10\" value=\"3\">\n        <input type=\"checkbox\" title=\"Show Icons\" name=\"showIcons\" checked>\n        <input type=\"range\" inline title=\"Icons Size\" name=\"iconsSize\" min=\"0.5\" max=\"2\" step=\"0.2\" value=\"1.3\" condition=\"showIcons\">\n        <input type=\"color\" title=\"Icons Color\" name=\"iconsColor\" value=\"#bbc3cc\" condition=\"showIcons\">\n        <input type=\"checkbox\" title=\"Media on Left/Right\" name=\"flexDirection\">\n        <fieldset type=\"background\" name=\"bg\">\n            <input type=\"image\" title=\"Background Image\" value=\"../_images/background3.jpg\">\n            <input type=\"color\" title=\"Background Color\" value=\"#ffffff\" selected>\n        </fieldset>\n        <input type=\"checkbox\" title=\"Overlay\" name=\"overlay\" condition=\"bg.type!='color'\" checked>\n        <input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#ffffff\" condition=\"bg.type!='color' && overlay\">\n        <input type=\"range\" inline title=\"Overlay Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0.8\" condition=\"bg.type!='color' && overlay\">\n    <!-- End block parameters -->\n    </mbr-parameters>\n    <div class=\"mbr-overlay\" mbr-if=\"overlay && bg.type !== 'color'\"></div>\n    <div class=\"container\">\n        <div class=\"mbr-row main-row mbr-justify-content-start\" mbr-class=\"{'mbr-row-reverse':flexDirection == true}\">\n            <div class=\"mbr-col-sm-12 mbr-col-md-12 mbr-col-lg-5\">\n                <h3 class=\" mbr-section-title mbr-fonts-style mbr-black align-left mbr-bold mbr-mb-30\" mbr-theme-style=\"display-6\" mbr-if=\"showTitle\" data-app-selector=\".mbr-section-title\">\n                    Contact Us\n                </h3>\n                <div class=\"items\">\n                    <p class=\"text-main mbr-fonts-style mbr-mb-30\" mbr-theme-style=\"display-7\" mbr-if=\"showText\" data-app-selector=\".text-main\">\n                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio veniam doloremque delectus, magnam. Accusantium quasi, tempore praesentium iste minus dolores..\n                    </p>\n                    <div class=\"items-icon\" mbr-list mbr-list-grow=\"stringCount\">\n                         <div class=\"item item-icon mbr-mb-16\">\n                             <div class=\"card-icon-text mbr-align-items-center d-flex\">\n                                <div class=\"icon-wrap mbr-align-items-center d-flex mbr-justify-content-center\">\n                                    <span mbr-icon class=\"mbr-iconfont fa-map-marker fa\" mbr-if=\"showIcons\"></span>\n                                </div>\n                                <p class=\"item mbr-text mbr-fonts-style\" mbr-theme-style=\"display-7\" data-app-selector=\".item, .items\">\n                                    Värtavägen 21, 115 53 Stockholm, Sweden</p>\n                            </div>\n                         </div>\n                         <div class=\"item item-icon mbr-mb-16\">\n                             <div class=\"card-icon-text mbr-align-items-center d-flex\">\n                                <div class=\"icon-wrap mbr-align-items-center d-flex mbr-justify-content-center\">\n                                    <span mbr-icon class=\"mbr-iconfont fa-phone fa\" mbr-if=\"showIcons\"></span>\n                                </div>\n                                <p class=\"item mbr-text mbr-fonts-style \" mbr-theme-style=\"display-7\" data-app-selector=\".item, .items\">\n                                    +371 248 0 3110</p>\n                            </div>\n                         </div>\n                         <div class=\"item item-icon mbr-mb-16\">\n                             <div class=\"card-icon-text mbr-align-items-center d-flex\">\n                                <div class=\"icon-wrap mbr-align-items-center d-flex mbr-justify-content-center\">\n                                    <span mbr-icon class=\"mbr-iconfont fa fa-paper-plane-o\" mbr-if=\"showIcons\"></span>\n                                </div>\n                                <p class=\"item mbr-text mbr-fonts-style\" mbr-theme-style=\"display-7\" data-app-selector=\".item, .items\">\n                                    yury.smirnov@cognitive.im\n                                </p>\n                                 \n                            </div>\n                         </div>\n                     </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <iframe \n  src=\"/jqueryform/form.html\" \n  style=\"min-width:260px;width:400px;height:640px;border:none;\"\n  frameborder=\"none\" \n  allowTransparency=\"true\" >\n</iframe>\n    \n</section>",
+          "_cid": "reocDmPFIY",
+          "_anchor": "content1-2k",
+          "_PHPplaceholders": [],
+          "_JSplaceholders": [],
           "_protectedParams": [],
           "_global": false,
           "_once": false,
